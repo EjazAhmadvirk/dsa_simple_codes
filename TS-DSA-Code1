@@ -1,0 +1,60 @@
+class Student {
+    private Name: string;
+    private Rollno: number;
+    private UniversityName: string;
+    private ClassName: string;
+
+    // Default constructor
+    constructor();
+    // Parameterized constructor
+    constructor(name: string, rollNumber: number, universityName: string, className: string);
+    // Copy constructor simulation
+    constructor(student?: Student | string, rollNumber?: number, universityName?: string, className?: string) {
+        if (arguments.length === 0) {
+            // Default constructor
+            this.Name = "";
+            this.Rollno = 0;
+            this.UniversityName = "";
+            this.ClassName = "";
+        } else if (typeof student === 'string') {
+            // Parameterized constructor
+            this.Name = student;
+            this.Rollno = rollNumber as number;
+            this.UniversityName = universityName as string;
+            this.ClassName = className as string;
+        } else if (student instanceof Student) {
+            // Copy constructor simulation
+            const other = student as Student;
+            this.Name = other.Name;
+            this.Rollno = other.Rollno;
+            this.UniversityName = other.UniversityName;
+            this.ClassName = other.ClassName;
+            console.log("Copy constructor was called.");
+        }
+    }
+
+    public DisplayInfo(): void {
+        console.log("Student Information:");
+        console.log(`Name: ${this.Name}`);
+        console.log(`Roll Number: ${this.Rollno}`);
+        console.log(`University Name: ${this.UniversityName}`);
+        console.log(`Class Name: ${this.ClassName}`);
+    }
+}
+
+// Main execution
+function main() {
+    // Default constructor
+    const student1 = new Student();
+    student1.DisplayInfo();
+
+    // Parameterized constructor
+    const student2 = new Student("Ejaz Ahmad", 1, "Riphah International University", "BSCS_3");
+    student2.DisplayInfo();
+
+    // Copy constructor simulation
+    const student3 = new Student(student2);
+    student3.DisplayInfo();
+}
+
+main();
